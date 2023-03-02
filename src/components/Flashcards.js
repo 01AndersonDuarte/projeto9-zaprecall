@@ -26,6 +26,7 @@ function Flashcard({number, question, answer}){
 
 const StyleBoxQuestion = styled.div`
     width: 100%;
+    height: 100%;
     padding: 5%;
     height: ${({stateQuestion})=>stateQuestion ? `300px` : `100px`};
     background-color: #FFFFFF;

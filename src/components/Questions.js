@@ -7,7 +7,7 @@ export default function Questions({stateQuestion, question, answer}){
     const [stateAnswer, setStateAnswer] = useState(false);
     return(
         <>
-            <Question stateQuestion={stateQuestion}>
+            <Question stateQuestion={stateQuestion} stateAnswer={stateAnswer}>
                 <h1>{question}</h1>
                 <img onClick={()=>setStateAnswer(true)} src={turn} alt=""/>
             </Question>
@@ -17,11 +17,11 @@ export default function Questions({stateQuestion, question, answer}){
 }
 const Question = styled.div`
     height: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    backface-visibility: hidden;
+
+    /* backface-visibility: hidden; */
     /* transform: ${({stateQuestion})=>stateQuestion ? `rotateY(0deg)` : `rotateY(180deg)`}; */
 
     display: ${({stateQuestion, stateAnswer})=>stateQuestion ? (stateAnswer ? `none` : ''): `none`};

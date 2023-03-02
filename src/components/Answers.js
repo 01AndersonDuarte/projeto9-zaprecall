@@ -5,35 +5,29 @@ export default function Answers({answer, stateAnswer}){
         <>
             <Answer stateAnswer={stateAnswer}>
                 <h1>{answer}</h1>
+                <Buttons stateAnswer={stateAnswer}>
+                    <button>Não lembrei</button>
+                    <button>Quase não lembrei</button>
+                    <button>Zap!</button>
+                </Buttons>
             </Answer>
-            <Buttons>
-                <button>Não lembrei</button>
-                <button>Quase não lembrei</button>
-                <button>Zap!</button>
-            </Buttons>
         </>
     );
 }
 const Answer = styled.div`
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    /* position: absolute;
-    padding: 5%;
-    left: 0;
-    width: 100%; */
-    /* height: 100%; */
-
-    backface-visibility: hidden;
-    transform: ${({stateAnswer})=>stateAnswer ? `rotateY(0deg)` : 'rotateY(180deg)'};
-
-    
+    background-color: blue;
 
     /* backface-visibility: hidden;
     transition: all 0.5s;
     transform-style: preserve-3d;
     transform: ${({stateAnswer})=>stateAnswer ? `rotateY(0deg)` : 'rotateY(180deg)'}; */
+
+    display: ${({stateAnswer})=>stateAnswer ? '' : `none`};
         
     h1{
         color: #333333;
@@ -46,16 +40,17 @@ const Answer = styled.div`
 
 `;
 const Buttons = styled.div`
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    transform: ${({stateAnswer})=>stateAnswer ? `rotateY(0deg)` : 'rotateY(180deg)'};
+    display: flex;
+    justify-content: space-around;
+    display: ${({stateAnswer})=>stateAnswer ? '' : `none`};
     button{
-        width: 20%;
-        height: 10%;
+        width: 120px;
+        height: 60px;
+        border-radius: 8px;
+        border: none;
         font-family: 'Recursive';
         font-weight: 400;
-        font-size: 24px;
-        line-height: 14px;
+        font-size: 18px;
+        line-height: 22px;
     }
 `;
