@@ -20,7 +20,6 @@ const Answer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: blue;
 
     /* backface-visibility: hidden;
     transition: all 0.5s;
@@ -35,7 +34,12 @@ const Answer = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 28px;
-        line-height: 22px;
+        line-height: 30px;
+    }
+    @media(max-width: 500px){
+        h1{
+            font-size: 18px;
+        }
     }
 
 `;
@@ -52,5 +56,13 @@ const Buttons = styled.div`
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
+    }
+    @media(max-width: 500px){
+        button{
+            width: 100px;
+            height: 40px;
+            font-size: 12px;
+            line-height: 14px;
+        }
     }
 `;

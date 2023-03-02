@@ -25,7 +25,6 @@ const Question = styled.div`
     /* transform: ${({stateQuestion})=>stateQuestion ? `rotateY(0deg)` : `rotateY(180deg)`}; */
 
     display: ${({stateQuestion, stateAnswer})=>stateQuestion ? (stateAnswer ? `none` : ''): `none`};
-    background-color: blue;
     h1{
         color: #333333;
         font-size: 28px;

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import play from "../assets/seta_play.png";
-import q from "./q";
+import questionsCards from "./questionsCards";
 import Questions from "./Questions";
 export default function Flashcards(){
     return(
         <StyleFlashcards>
-            {q.map((q, i)=><Flashcard key={q.question} number={i+1} question={q.question} answer={q.answer}/>)}
+            {questionsCards.map((q, i)=><Flashcard key={q.question} number={i+1} question={q.question} answer={q.answer}/>)}
         </StyleFlashcards>
     );
 }
@@ -40,7 +40,6 @@ const StyleBoxQuestion = styled.div`
     justify-content: center;
     
     div:first-child{
-        background-color: black;
         display: flex;
         justify-content: space-between;
         display: ${({stateQuestion})=>stateQuestion ? `none` : ''};
@@ -60,7 +59,7 @@ const StyleBoxQuestion = styled.div`
         display: none;
     }
     @media(max-width: 500px){
-        height: ${({stateQuestion})=>stateQuestion ? `250px` : `65px`};
+        height: ${({stateQuestion})=>stateQuestion ? `200px` : `65px`};
         div:first-child{
             p{
                 font-size: 16px;
