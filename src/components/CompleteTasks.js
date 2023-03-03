@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function CompleteTasks({countTasks}){
     return(
-        <Footer>
+        <Footer data-test="footer">
             <p>{countTasks.completeTasks}/{countTasks.totalTasks} CONCLUÍDOS</p>
         </Footer>
     );

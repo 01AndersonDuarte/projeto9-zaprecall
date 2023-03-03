@@ -69,7 +69,9 @@ const StyleBoxQuestion = styled.div`
         cursor: pointer;
     }
     @media(max-width: 500px){
-        height: ${({stateQuestion})=>stateQuestion ? `200px` : `65px`};
+        height: ${({stateQuestion, finalState})=>stateQuestion ? (finalState.situacion ? `65px` : `200px`) : `65px`};
+
+        /* height: ${({stateQuestion})=>stateQuestion ? `200px` : `65px`}; */
         div:first-child{
             p{
                 font-size: 16px;
