@@ -5,7 +5,7 @@ import Questions from "./Questions";
 
 export default function Flashcards({questionsCards, CheckTasks}){
     return(
-        <StyleFlashcards>
+        <StyleFlashcards data-test="flashcard">
             {questionsCards.map((q, i)=>
             <Flashcard
                 key={q.question}
@@ -19,16 +19,17 @@ export default function Flashcards({questionsCards, CheckTasks}){
 
 function Flashcard({number, question, CheckTasks}){
     const [stateQuestion, setstateQuestion] = useState(false);
-    const [finalState, setFinalState] = useState({situacion: false, image: play, color: "#333333"});
-    function irFinal(finalImage, finalColor){
-        setFinalState({situacion: true, image: finalImage, color: finalColor});
+    const [finalState, setFinalState] = useState({situacion: false, image: play, color: "#333333", dataTest: "play-btn"});
+    function irFinal(finalImage, finalColor, finalDataTest){
+        setFinalState({situacion: true, image: finalImage, color: finalColor, dataTest: finalDataTest});
         CheckTasks();
     }
     return(
         <StyleBoxQuestion stateQuestion={stateQuestion} finalState={finalState}>
             <div>
-                <p>Pergunta {number}</p>
-                <img onClick={()=>setstateQuestion(true)} src={finalState.image} alt=""/>
+                <p data-test="flashcard-text">Pergunta {number}</p>
+                <img data-test={finalState.dataTest}
+                onClick={()=>setstateQuestion(true)} src={finalState.image} alt=""/>
             </div>
             <Questions stateQuestion={stateQuestion} question={question} irFinal={irFinal}/>
         </StyleBoxQuestion>

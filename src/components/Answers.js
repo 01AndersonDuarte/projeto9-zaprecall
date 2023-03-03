@@ -5,30 +5,27 @@ import certo from "../assets/icone_certo.png";
 import erro from "../assets/icone_erro.png";
 import quase from "../assets/icone_quase.png";
 
-import CheckAnswers from "./CheckAnswers";
-
 export default function Answers({question, stateAnswer, irFinal}){
     const [stateCheck, setStateCheck] = useState(false);
     return(
         <>
             <Answer stateAnswer={stateAnswer} stateCheck={stateCheck}>
-                <h1>{question.answer}</h1>
+                <h1 data-test="flashcard-text">{question.answer}</h1>
                 <Buttons stateAnswer={stateAnswer} stateCheck={stateCheck}>
-                    <button onClick={()=>{
-                        irFinal(erro, "#FF3030");
+                    <button data-test="no-btn" onClick={()=>{
+                        irFinal(erro, "#FF3030", "no-icon");
                         setStateCheck(true);
                     }}>Não lembrei</button>
-                    <button onClick={()=>{
-                        irFinal(quase, "#FF922E");
+                    <button data-test="partial-btn" onClick={()=>{
+                        irFinal(quase, "#FF922E", "partial-icon");
                         setStateCheck(true);
                     }}>Quase não lembrei</button>
-                    <button onClick={()=>{
-                        irFinal(certo, "#2FBE34");
+                    <button data-test="zap-btn" onClick={()=>{
+                        irFinal(certo, "#2FBE34", "zap-icon");
                         setStateCheck(true);
                     }}>Zap!</button>
                 </Buttons>
             </Answer>
-            <CheckAnswers stateCheck={stateCheck}/>
         </>
     );
 }

@@ -8,8 +8,8 @@ export default function Questions({stateQuestion, question, irFinal}){
     return(
         <>
             <Question stateQuestion={stateQuestion} stateAnswer={stateAnswer}>
-                <h1>{question.question}</h1>
-                <img onClick={()=>setStateAnswer(true)} src={turn} alt=""/>
+                <h1 data-test="flashcard-text">{question.question}</h1>
+                <img data-test="turn-btn" onClick={()=>setStateAnswer(true)} src={turn} alt=""/>
             </Question>
             <Answers question={question} stateAnswer={stateAnswer} irFinal={irFinal}/> 
         </>
