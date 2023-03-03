@@ -5,7 +5,7 @@ import Questions from "./Questions";
 
 export default function Flashcards({questionsCards, CheckTasks}){
     return(
-        <StyleFlashcards data-test="flashcard">
+        <StyleFlashcards>
             {questionsCards.map((q, i)=>
             <Flashcard
                 key={q.question}
@@ -25,7 +25,7 @@ function Flashcard({number, question, CheckTasks}){
         CheckTasks();
     }
     return(
-        <StyleBoxQuestion stateQuestion={stateQuestion} finalState={finalState}>
+        <StyleBoxQuestion data-test="flashcard" stateQuestion={stateQuestion} finalState={finalState}>
             <div>
                 <p data-test="flashcard-text">Pergunta {number}</p>
                 <img data-test={finalState.dataTest}
@@ -60,7 +60,7 @@ const StyleBoxQuestion = styled.div`
             font-weight: 700;
             color: ${({finalState})=>finalState.color};
             line-height: 19px;
-            text-decoration: line-through;
+            text-decoration: ${({finalState})=>finalState.situacion ? `line-through` : `none`};
             text-decoration-color: ${({finalState})=>finalState.color};
         }
         
