@@ -1,34 +1,44 @@
 import { useState } from "react";
 import styled from "styled-components";
 import play from "../assets/seta_play.png";
-import questionsCards from "./questionsCards";
 import Questions from "./Questions";
-export default function Flashcards(){
+
+export default function Flashcards({questionsCards, CheckTasks}){
     return(
         <StyleFlashcards>
-            {questionsCards.map((q, i)=><Flashcard key={q.question} number={i+1} question={q.question} answer={q.answer}/>)}
+            {questionsCards.map((q, i)=>
+            <Flashcard
+                key={q.question}
+                number={i+1}
+                question={q}
+                CheckTasks={CheckTasks}
+            />)}
         </StyleFlashcards>
     );
 }
 
-function Flashcard({number, question, answer}){
+function Flashcard({number, question, CheckTasks}){
     const [stateQuestion, setstateQuestion] = useState(false);
+    const [finalState, setFinalState] = useState({situacion: false, image: play, color: "#333333"});
+    function irFinal(finalImage, finalColor){
+        setFinalState({situacion: true, image: finalImage, color: finalColor});
+        CheckTasks();
+    }
     return(
-        <StyleBoxQuestion stateQuestion={stateQuestion}>
+        <StyleBoxQuestion stateQuestion={stateQuestion} finalState={finalState}>
             <div>
                 <p>Pergunta {number}</p>
-                <img onClick={()=>setstateQuestion(true)} src={play} alt=""/>
+                <img onClick={()=>setstateQuestion(true)} src={finalState.image} alt=""/>
             </div>
-            <Questions stateQuestion={stateQuestion} question={question} answer={answer}/>
+            <Questions stateQuestion={stateQuestion} question={question} irFinal={irFinal}/>
         </StyleBoxQuestion>
     );
 }
 
 const StyleBoxQuestion = styled.div`
     width: 100%;
-    height: 100%;
     padding: 5%;
-    height: ${({stateQuestion})=>stateQuestion ? `300px` : `100px`};
+    height: ${({stateQuestion, finalState})=>stateQuestion ? (finalState.situacion ? `100px` : `300px`) : `100px`};
     background-color: #FFFFFF;
     margin-bottom: 5%;
 
@@ -42,21 +52,20 @@ const StyleBoxQuestion = styled.div`
     div:first-child{
         display: flex;
         justify-content: space-between;
-        display: ${({stateQuestion})=>stateQuestion ? `none` : ''};
+        display: ${({stateQuestion, finalState})=>stateQuestion ? (finalState.situacion ? '' : `none`) : ''};
         p{
             font-size: 26px;
             font-family: 'Recursive';
             font-weight: 700;
-            color: #333333;
+            color: ${({finalState})=>finalState.color};
             line-height: 19px;
+            text-decoration: line-through;
+            text-decoration-color: ${({finalState})=>finalState.color};
         }
         
     }
     img:hover{
         cursor: pointer;
-    }
-    h2{
-        display: none;
     }
     @media(max-width: 500px){
         height: ${({stateQuestion})=>stateQuestion ? `200px` : `65px`};
@@ -69,6 +78,7 @@ const StyleBoxQuestion = styled.div`
 `;
 const StyleFlashcards = styled.div`
     width: 55%;
+    margin-bottom: 5%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

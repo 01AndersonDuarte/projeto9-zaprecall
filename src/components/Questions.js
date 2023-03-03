@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { useState } from "react";
 import Answers from "./Answers";
 
-export default function Questions({stateQuestion, question, answer}){
+export default function Questions({stateQuestion, question, irFinal}){
     const [stateAnswer, setStateAnswer] = useState(false);
     return(
         <>
             <Question stateQuestion={stateQuestion} stateAnswer={stateAnswer}>
-                <h1>{question}</h1>
+                <h1>{question.question}</h1>
                 <img onClick={()=>setStateAnswer(true)} src={turn} alt=""/>
             </Question>
-            <Answers answer={answer} stateAnswer={stateAnswer}/> 
+            <Answers question={question} stateAnswer={stateAnswer} irFinal={irFinal}/> 
         </>
     );
 }

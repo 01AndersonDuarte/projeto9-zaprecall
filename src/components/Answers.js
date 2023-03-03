@@ -1,16 +1,34 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function Answers({answer, stateAnswer}){
+import certo from "../assets/icone_certo.png";
+import erro from "../assets/icone_erro.png";
+import quase from "../assets/icone_quase.png";
+
+import CheckAnswers from "./CheckAnswers";
+
+export default function Answers({question, stateAnswer, irFinal}){
+    const [stateCheck, setStateCheck] = useState(false);
     return(
         <>
-            <Answer stateAnswer={stateAnswer}>
-                <h1>{answer}</h1>
-                <Buttons stateAnswer={stateAnswer}>
-                    <button>Não lembrei</button>
-                    <button>Quase não lembrei</button>
-                    <button>Zap!</button>
+            <Answer stateAnswer={stateAnswer} stateCheck={stateCheck}>
+                <h1>{question.answer}</h1>
+                <Buttons stateAnswer={stateAnswer} stateCheck={stateCheck}>
+                    <button onClick={()=>{
+                        irFinal(erro, "#FF3030");
+                        setStateCheck(true);
+                    }}>Não lembrei</button>
+                    <button onClick={()=>{
+                        irFinal(quase, "#FF922E");
+                        setStateCheck(true);
+                    }}>Quase não lembrei</button>
+                    <button onClick={()=>{
+                        irFinal(certo, "#2FBE34");
+                        setStateCheck(true);
+                    }}>Zap!</button>
                 </Buttons>
             </Answer>
+            <CheckAnswers stateCheck={stateCheck}/>
         </>
     );
 }
@@ -20,14 +38,7 @@ const Answer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    /* backface-visibility: hidden;
-    transition: all 0.5s;
-    transform-style: preserve-3d;
-    transform: ${({stateAnswer})=>stateAnswer ? `rotateY(0deg)` : 'rotateY(180deg)'}; */
-
-    display: ${({stateAnswer})=>stateAnswer ? '' : `none`};
-        
+    display: ${({stateAnswer, stateCheck})=>stateAnswer ? (stateCheck ? `none`: ''): `none`};    
     h1{
         color: #333333;
         font-family: 'Recursive';
@@ -46,7 +57,7 @@ const Answer = styled.div`
 const Buttons = styled.div`
     display: flex;
     justify-content: space-around;
-    display: ${({stateAnswer})=>stateAnswer ? '' : `none`};
+    display: ${({stateAnswer, stateCheck})=>stateAnswer ? (stateCheck ? `none`: ''): `none`};
     button{
         width: 120px;
         height: 60px;
@@ -56,6 +67,19 @@ const Buttons = styled.div`
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
+        background-color: red;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    button:nth-child(1){
+        background-color: #FF3030;
+    }
+    button:nth-child(2){
+        background-color: #FF922E;
+    }
+    button:nth-child(3){
+        background-color: #2FBE34;
     }
     @media(max-width: 500px){
         button{
