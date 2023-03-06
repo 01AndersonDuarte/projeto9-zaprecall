@@ -5,8 +5,8 @@ import sad from "../assets/sad.png";
 export default function CompleteTasks({countTasks, lastAnswers, error}){
     return(
         <Footer data-test="footer">
-            <FinalMessages countTasks={countTasks}>
-                <span data-test="finish-text">
+            <FinalMessages countTasks={countTasks} data-test="finish-text">
+                <span>
                     <div>
                         <img src={error ? sad : party} alt=""/>
                         <h1>{error ? `Putz...` : `Parabéns!`}</h1>
