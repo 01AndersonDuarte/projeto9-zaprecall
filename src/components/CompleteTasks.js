@@ -5,12 +5,14 @@ import sad from "../assets/sad.png";
 export default function CompleteTasks({countTasks, lastAnswers, error}){
     return(
         <Footer data-test="footer">
-            <FinalMessages countTasks={countTasks} data-test="finish-text">
-                <div>
-                    <img src={error ? sad : party} alt=""/>
-                    <h1>{error ? `Putz...` : `Parabéns!`}</h1>
-                </div>
-                <p>{error ? `Ainda faltam alguns...Mas não desanime!` : `Você não esqueceu de nenhum flashcard!`}</p>
+            <FinalMessages countTasks={countTasks}>
+                <span data-test="finish-text">
+                    <div>
+                        <img src={error ? sad : party} alt=""/>
+                        <h1>{error ? `Putz...` : `Parabéns!`}</h1>
+                    </div>
+                    <p>{error ? `Ainda faltam alguns...Mas não desanime!` : `Você não esqueceu de nenhum flashcard!`}</p>
+                </span>
             </FinalMessages>
             <p>{countTasks.completeTasks}/{countTasks.totalTasks} CONCLUÍDOS</p>
             <div>{lastAnswers.map((a)=><img data-test={a.dataTest} src={a.image} alt=""/>)}</div>
