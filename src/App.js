@@ -6,6 +6,7 @@ import questionsCards from "./components/questionsCards";
 
 import styled from "styled-components";
 import { useState } from "react";
+import Welcome from "./components/Welcome";
 
 // import play from "./assets/seta_play.png";
 // import certo from "./assets/icone_certo.png";
@@ -17,6 +18,7 @@ import { useState } from "react";
 // });
 
 function App() {
+  const [stateWelcome, setStateWelcome] = useState(false);
   const [countTasks, setCountTasks] = useState({completeTasks: 0, totalTasks: questionsCards.length});
   function CheckTasks(){
     setCountTasks({completeTasks: countTasks.completeTasks+1, totalTasks: questionsCards.length});
@@ -26,11 +28,14 @@ function App() {
   }
 
   return (
-    <Container>
-      <Top/>
-      <Flashcards questionsCards={questionsCards} CheckTasks={CheckTasks}/>
-      <CompleteTasks countTasks={countTasks}/>
-    </Container>
+    <>
+      <Welcome setStateWelcome={setStateWelcome} stateWelcome={stateWelcome}/>
+      <Container stateWelcome={stateWelcome}>
+        <Top/>
+        <Flashcards questionsCards={questionsCards} CheckTasks={CheckTasks}/>
+        <CompleteTasks countTasks={countTasks}/>
+      </Container>
+    </>
   );
 }
 
@@ -43,4 +48,5 @@ const Container = styled.div`
   align-items: center;
   /* justify-content: center; */
   background-color: #FB6B6B;
+  display: ${({stateWelcome})=>stateWelcome ? '' : `none`};
 `;
