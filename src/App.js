@@ -10,7 +10,7 @@ import Welcome from "./components/Welcome";
 
 // import play from "./assets/seta_play.png";
 // import certo from "./assets/icone_certo.png";
-// import erro from "./assets/icone_erro.png";
+import erro from "./assets/icone_erro.png";
 // import quase from "./assets/icone_quase.png";
 
 // const questionsCardComplete = questionsCards.map((q)=>{
@@ -20,8 +20,14 @@ import Welcome from "./components/Welcome";
 function App() {
   const [stateWelcome, setStateWelcome] = useState(false);
   const [countTasks, setCountTasks] = useState({completeTasks: 0, totalTasks: questionsCards.length});
-  function CheckTasks(){
+  const [lastAnswers, setLastAnswers] = useState([]);
+  const [error, setError] = useState(false);
+  function CheckTasks(finalImage, finalDataTest){
+    if(finalImage===erro){
+      setError(true);
+    }
     setCountTasks({completeTasks: countTasks.completeTasks+1, totalTasks: questionsCards.length});
+    setLastAnswers([...lastAnswers, {image: finalImage, dataTest: finalDataTest}]);
   //   questionsCardComplete = questionsCardComplete.map(()=>{
   //     return {};
   //   });
@@ -33,7 +39,7 @@ function App() {
       <Container stateWelcome={stateWelcome}>
         <Top/>
         <Flashcards questionsCards={questionsCards} CheckTasks={CheckTasks}/>
-        <CompleteTasks countTasks={countTasks}/>
+        <CompleteTasks countTasks={countTasks} lastAnswers={lastAnswers} error={error}/>
       </Container>
     </>
   );

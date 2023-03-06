@@ -22,7 +22,7 @@ function Flashcard({number, question, CheckTasks}){
     const [finalState, setFinalState] = useState({situacion: false, image: play, color: "#333333", dataTest: "play-btn"});
     function irFinal(finalImage, finalColor, finalDataTest){
         setFinalState({situacion: true, image: finalImage, color: finalColor, dataTest: finalDataTest});
-        CheckTasks();
+        CheckTasks(finalImage, finalDataTest);
     }
     return(
         <StyleBoxQuestion data-test="flashcard" stateQuestion={stateQuestion} finalState={finalState}>
